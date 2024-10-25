@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ApplicationRole>
+@{
+    ViewData["Title"] = "AllRoles";
+}
+
+<style>
+    .searchClass{
+        display:flex;
+        justify-content:center;
+    }
+</style>
+
+
+<h1>All Roles</h1>
+
+<br />
+<a asp-action="Create" class=" btn btn-primary"> Create new role </a>
+<br />
+<br />
+
+@if (Model?.Count() > 0)
+{
+    <table class="table table-dark">
+        <thead class="table-primary">
+            <tr>
+                <th>@Html.DisplayNameFor(x => x.Id)</th>
+                <th>@Html.DisplayNameFor(x => x.Name)</th>
+                <th>@Html.DisplayNameFor(x => x.CreatAt)</th>
+                <th>Details</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Itme in Model)
+            {
+                <tr>
+                    <td>@Itme.Id</td>
+                    <td>@Itme.Name</td>
+                    <td>@Html.DisplayFor(m => Itme.CreatAt.Day)
+                        -@Html.DisplayFor(m => Itme.CreatAt.Month)
+                        -@Html.DisplayFor(m => Itme.CreatAt.Year)</td>
+                    <partial name="_ButtonsPartialView" model="Itme.Id" />
+
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+else
+{
+    <div class="alert alert-warning">
+        <h3>no Rols Found</h3>
+
+    </div>
+}
+
+
+
